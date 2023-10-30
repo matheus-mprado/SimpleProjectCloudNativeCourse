@@ -7,7 +7,7 @@ pipeline{
                 echo "Iniciando a pipeline"
             }
         }
-        
+
         stage ('Build Image'){
             steps {
                 script {
@@ -25,6 +25,14 @@ pipeline{
                         /* Remove docker image*/
                         sh "docker rmi -f matheusmprado/simpleproject:v${env.BUILD_ID}"
                     }
+                }
+            }
+        }
+
+        stage ("Deploy Kubernetes") {
+            steps {
+                withKubeConfig([credentialsId: 'kubeconfig']) {
+                    sh 'kubectl apply -f ./deployment.yaml'
                 }
             }
         }

@@ -8,7 +8,7 @@ const server = http.createServer((req, res) => {
     // Obtém o nome do pod usando o módulo 'os'
     const podName = os.hostname();
 
-    res.end(`Pod rodando First Commit Jenkins: ${podName}\n`);
+    res.end(`Pod rodando no: ${podName}\n`);
 });
 
 const port = 3000;

@@ -28,12 +28,12 @@ pipeline{
                 }
             }
         }
-
+        // Não conseguimos fazer pelo docker in a docker que estamos utilizando
         stage ("Deploy Kubernetes") {
             steps {
-                
+                withKubeConfig([credentialsId: 'kubeconfig']) {
                     sh 'kubectl apply -f ./deployment.yaml'
-                
+                }
             }
         }
     }
